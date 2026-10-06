@@ -133,7 +133,7 @@ const [menuError, setMenuError] = useState("");
     </div>
   </div>
 
-  {/* Slide indicators */}
+  {/* Slide */}
   <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
     {heroImages.map((_, index) => (
       <button
