@@ -151,7 +151,7 @@ const [menuError, setMenuError] = useState("");
 
 </section>
 
-{/* Menu */}
+{/* Menu items */}
       <section
         id="specials"
         className="mx-auto max-w-7xl px-6 py-24 md:px-10"

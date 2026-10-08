@@ -115,7 +115,7 @@ const supabase = createClient();
       {/* Order */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:px-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          {/* Food items */}
+          {/* Food  */}
           <div>
             <div className="grid gap-5 md:grid-cols-2">
               {orderItems.map((item) => {
