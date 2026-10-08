@@ -112,7 +112,7 @@ const supabase = createClient();
         </div>
       </section>
 
-      {/* Order content */}
+      {/* Order */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:px-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
           {/* Food items */}

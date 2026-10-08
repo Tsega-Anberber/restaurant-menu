@@ -134,7 +134,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           {/* Cart */}
           <a
-            href="/order"
+            href="/my-orders"
             className={`relative flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-300 ${
               isScrolled
                 ? "text-[#F5EBDD] hover:bg-[#F5EBDD]/10"
