@@ -94,7 +94,7 @@ export default function SignupPage() {
             className="flex flex-col gap-5"
             onSubmit={handleSignup}
           >
-            ```tsx
+          
 <div>
   <label
     htmlFor="fullName"
@@ -132,7 +132,6 @@ export default function SignupPage() {
     className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-green-800"
   />
 </div>
-```
             <div>
               <label
                 htmlFor="email"

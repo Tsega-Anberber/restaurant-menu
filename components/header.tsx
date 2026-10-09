@@ -13,6 +13,50 @@ export default function Header() {
 
 const router = useRouter();
 const supabase = createClient();
+// Sign out the current user
+const handleSignOut = async () => {
+  setIsSigningOut(true);
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error("Sign out failed:", error.message);
+    setIsSigningOut(false);
+    return;
+  }
+
+  setIsLoggedIn(false);
+  router.push("/");
+  router.refresh();
+  setIsSigningOut(false);
+};
+// Check whether a user is signed in
+useEffect(() => {
+  let mounted = true;
+
+  const checkUser = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (mounted) {
+      setIsLoggedIn(!!user);
+    }
+  };
+
+  checkUser();
+
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
+    setIsLoggedIn(!!session?.user);
+  });
+
+  return () => {
+    mounted = false;
+    subscription.unsubscribe();
+  };
+}, [supabase]);
 
   // Load cart count
   useEffect(() => {
@@ -173,6 +217,23 @@ const supabase = createClient();
               </span>
             )}
           </a>
+          
+{/* Sign Out */}
+{isLoggedIn && (
+  <button
+    type="button"
+    onClick={handleSignOut}
+    disabled={isSigningOut}
+    className={`rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-300 disabled:opacity-60 ${
+      isScrolled
+        ? "border border-[#D4A72C]/50 text-[#F5EBDD] hover:bg-[#F5EBDD]/10"
+        : "border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+    }`}
+  >
+    {isSigningOut ? "Signing out..." : "Sign Out"}
+  </button>
+)}
+
 
           {/* Admin */}
           <a
