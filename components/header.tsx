@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "../lib/supabase/client";
 
 export default function Header() {
   const [showHeader, setShowHeader] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+const router = useRouter();
+const supabase = createClient();
 
   // Load cart count
   useEffect(() => {

@@ -7,6 +7,8 @@ import { createClient } from "../../lib/supabase/client";
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -36,10 +38,15 @@ export default function SignupPage() {
     setLoading(true);
 
     const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
+  email,
+  password,
+  options: {
+    data: {
+      full_name: fullName.trim(),
+      phone: phone.trim(),
+    },
+  },
+});
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -87,6 +94,45 @@ export default function SignupPage() {
             className="flex flex-col gap-5"
             onSubmit={handleSignup}
           >
+            ```tsx
+<div>
+  <label
+    htmlFor="fullName"
+    className="mb-2 block text-sm font-medium"
+  >
+    Full Name
+  </label>
+  <input
+    id="fullName"
+    type="text"
+    value={fullName}
+    onChange={(e) => setFullName(e.target.value)}
+    placeholder="Enter your full name"
+    required
+    autoComplete="name"
+    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-green-800"
+  />
+</div>
+
+<div>
+  <label
+    htmlFor="phone"
+    className="mb-2 block text-sm font-medium"
+  >
+    Phone Number
+  </label>
+  <input
+    id="phone"
+    type="tel"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    placeholder="Enter your phone number"
+    required
+    autoComplete="tel"
+    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-green-800"
+  />
+</div>
+```
             <div>
               <label
                 htmlFor="email"
